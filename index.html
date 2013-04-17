@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS -->
+    <style type="text/css">
+      * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0px auto;
+        width: 100%;
+        height: 100%;
+      }
+      #main {
+        margin: 0px auto;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -o-box;
+        display: box;
+        -webkit-box-pack: center;
+        -moz-box-pack: center;
+        box-pack: center;
+      }
+      .box {
+        border-style: solid;
+        background: yellow;
+        border-width: 1px;
+        text-align: center;
+        font-size: 5px;
+        color: blue;
+      }
+      </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+    <div id="main"></div>
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+    <script>
+      $(function() {
+        var square = 30;
+        var width = $(document).width();
+        var height = $(document).height();
+        var sqwidth = Math.floor(width / square);
+        var sqheight = Math.floor(height / square);
+        var no = 0;
+        for (var x = 0; x < sqwidth; x++) {
+          var sqdiv = $("<div>").addClass("square");
+          for (var y = 0; y < sqheight; y++) {
+            var div = $("<div>").addClass("box");
+            $(div).width(square);
+            $(div).height(square);
+            $(div).css("line-height", square + "px");
+            no += 1;
+            $(div).text(no);
+            $(div).on("click", function(e) {
+              alert($(this).text());
+            });
+            $(div).on("rdm", function(e) {
+              var _this = this;
+              setInterval(function() {
+                $(_this).css("background-color", "rgb(" + Rndm() + ")");
+              }, Math.floor(Math.random() * 10) * 100);
+            });
+            $(div).trigger("rdm");
+            $(sqdiv).append(div);
+          }
+          $("#main").append(sqdiv);
+        }
+      });
+      function Rndm() {
+        var rdm = function() { return Math.floor(Math.random() * 255); };
+        var rgbcolor = rdm() + "," + rdm() + "," + rdm();
+        return rgbcolor;
+      }
+    </script>
+
+  </body>
+
+</html>
